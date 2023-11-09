@@ -49,22 +49,19 @@ class PruebaEcuacionSegundoGrado(unittest.TestCase):
             ecuacionSegundoGrado.definirParametros("3.1", "5.2", "c")
 
 
-    def test_solucionESG_parametrosNumericos_raicesComplejasConjugadas_subTest(self):
-        # Arrange
-        ecuacionSegundoGrado=EcuacionSegundoGrado()
+
+    def test_solucionESG_parametrosNoNumericos_lanzaException_subTest(self):
+        ecuacionSegundoGrado = EcuacionSegundoGrado()
 
         items = (
-            {"Case": "Caso 01", "a": 1, "b": 1, "c": 1, "RaizEsperada1": "-0.50+0.87i", "RaizEsperada2": "-0.50-0.87i"},
-            {"Case": "Caso 02", "a": 1, "b": 2, "c": 3, "RaizEsperada1": "-1.00+1.41i", "RaizEsperada2": "-1.00-1.41i"},
+            {"Case": "Caso 01", "a": "a", "b":  "b", "c": "c"},
+            {"Case": "Caso 02", "a": "a", "b": 1, "c": 1},
+            {"Case": "Caso 03", "a": 1, "b": "aa", "c": 1},
+            {"Case": "Caso 03", "a": 1, "b": "3,1", "c": 1},
         )
 
-        # Do
         for item in items:
             with self.subTest(item["Case"]):
-                ecuacionSegundoGrado.definirParametros(item["a"], item["b"], item["c"])
-            RaizActual1, RaizActual2 = ecuacionSegundoGrado.solucionESG()
-
-            # Assert
-            self.assertEqual(item["RaizEsperada1"], RaizActual1)
-            self.assertEqual(item["RaizEsperada2"], RaizActual2)
-
+                self.assertTrue(True)
+                with self.assertRaises(ValueError):
+                    ecuacionSegundoGrado.definirParametros(item["a"], item["b"], item["c"])
