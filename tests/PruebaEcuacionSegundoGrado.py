@@ -48,8 +48,6 @@ class PruebaEcuacionSegundoGrado(unittest.TestCase):
         with self.assertRaises(ValueError):
             ecuacionSegundoGrado.definirParametros("3.1", "5.2", "c")
 
-
-
     def test_solucionESG_parametrosNoNumericos_lanzaException_subTest(self):
         ecuacionSegundoGrado = EcuacionSegundoGrado()
 
